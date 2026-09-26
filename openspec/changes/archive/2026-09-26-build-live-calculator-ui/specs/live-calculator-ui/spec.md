@@ -11,6 +11,24 @@ The UI SHALL present a centered, dark-only layout consisting of an expression in
 - **WHEN** the viewport is 360 px wide or 1280 px wide
 - **THEN** the calculator remains centered, readable, and free of horizontal scrolling
 
+### Requirement: Restrained green-on-black palette
+The UI SHALL render the expression and result in a green accent on the dark background, use the same accent for the focused divider, and render errors in a visually distinct non-green color, without glow, animation, or decorative effects.
+
+#### Scenario: Result and error colors
+- **WHEN** a result and then an error are displayed
+- **THEN** the result is green and the error is red, both with readable contrast on the dark background
+
+### Requirement: Long expressions wrap
+The expression field SHALL wrap long expressions onto multiple lines and grow vertically instead of scrolling horizontally, keeping the borderless style, SHALL ignore the Enter key, and SHALL replace pasted newlines with spaces.
+
+#### Scenario: Long expression
+- **WHEN** the user enters an expression wider than the field
+- **THEN** the text wraps onto additional lines, the field grows, and the divider stays directly beneath it
+
+#### Scenario: Enter and pasted newlines
+- **WHEN** the user presses Enter or pastes text containing newlines
+- **THEN** no line break is inserted and the expression is sent as a single line
+
 ### Requirement: Live debounced calculation
 The UI SHALL send the current expression to `POST /api/calculate` automatically 300 ms after the user stops typing, without requiring Enter or any click.
 
