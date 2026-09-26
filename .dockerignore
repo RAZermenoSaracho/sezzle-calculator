@@ -1,0 +1,11 @@
+.git
+.claude
+openspec
+**/node_modules
+frontend/dist
+frontend/coverage
+backend/bin
+backend/coverage.*
+*.md
+.env
+.env.*
