@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"os"
 	"time"
+
+	"sezzle-calculator/backend/internal/api"
 )
 
 func main() {
@@ -24,5 +26,5 @@ func main() {
 }
 
 func newHandler() http.Handler {
-	return http.NewServeMux()
+	return api.NewHandler()
 }
