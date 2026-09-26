@@ -1,7 +1,7 @@
 # project-foundation Specification
 
 ## Purpose
-TBD - created by archiving change bootstrap-fullstack-foundation. Update Purpose after archive.
+Define the repository layout, frontend and backend toolchains, and local development integration that all other capabilities build on.
 
 ## Requirements
 
