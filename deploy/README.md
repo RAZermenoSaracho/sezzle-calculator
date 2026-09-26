@@ -38,15 +38,10 @@ It is **disabled by default**: nothing runs until the repository variable `DEPLO
 4. Set `DEPLOY_ENABLED=true` and any optional variables above.
 5. Run `Deploy` once via **Run workflow** and check the health step.
 
-## Verified facts and remaining questions
+## Verified facts
 
-Ricardo verified manually that the image builds and runs in the Ubuntu Vagrant VM, that port 8080 is forwarded to the Mac, and that the app is reachable through the Cloudflare Tunnel at https://sezzle-calculator.razs.dev.
+Verified by Ricardo in the real environment:
 
-Still to confirm before enabling:
-
-- Is the shared VM, described as an ephemeral test host, acceptable for a long-running container?
-- The runner labels and the user the runner service runs as.
-- Whether `production` deployments should require approval.
-- Whether the runner can run `vagrant ssh` non-interactively (no TTY); `deploy.sh` passes `-T` for this.
-
-`deploy.sh` has only been validated statically (`bash -n`); it has not been run against the server.
+- The runner has labels `self-hosted`, `macOS`, `X64`, runs as a launchd service, and can run `vagrant` (`/usr/local/bin/vagrant`).
+- The Docker VM directory is `/Users/razs/production/n8n-vm`; `vagrant ssh -c ... -- -T` works non-interactively.
+- A manual Deploy run built and replaced the container (`Restart=unless-stopped`, port 8080), and both `http://127.0.0.1:8080/api/health` and `https://sezzle-calculator.razs.dev/api/health` returned `{"status":"ok"}`.
