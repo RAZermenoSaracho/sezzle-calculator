@@ -207,7 +207,13 @@ Environment variables: `PORT` (default `8080`) and `STATIC_DIR` (set to `/app/st
 
 ## CI/CD
 
-CI and deployment are planned in the `add-github-ci-cd` OpenSpec change and are not part of the repository yet. This section will describe the workflows once they exist.
+- **CI** (`.github/workflows/ci.yml`) runs on pull requests and pushes to `main`, on GitHub-hosted runners with no secrets:
+  - frontend: `npm ci`, lint, tests, build
+  - backend: `gofmt` check, `go vet`, tests, build
+  - docker: builds the image (not published)
+- **CD** (`.github/workflows/deploy.yml`) runs on the repository's self-hosted runner after CI succeeds on `main`. It builds the commit inside the shared Docker VM through Vagrant, replaces the `sezzle-calculator` container, and checks `/api/health`. It is disabled until the repository variable `DEPLOY_ENABLED` is `true`.
+
+Runner, GitHub Environment, variables, VM, and Cloudflare setup are operator tasks; see [`deploy/README.md`](deploy/README.md).
 
 ## AI tooling disclosure
 
