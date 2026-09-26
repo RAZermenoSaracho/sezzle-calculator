@@ -17,3 +17,17 @@
 
 ## 5. Quality gate
 - [x] 5.1 Run all backend and frontend checks from `CLAUDE.md`. Verify success and that no server-side or CI/CD files were added.
+
+## Verification record
+
+Docker is not available on the development Mac, so task 2.2 was first closed with static validation only (Dockerfile and `.dockerignore` review, `npm run build`, static `CGO_ENABLED=0 go build`, and the Go server serving the built `dist` on one port). The container behavior was later verified manually by Ricardo on a Docker-capable Ubuntu environment (Vagrant VM):
+
+- `docker build -t sezzle-calculator:test .` succeeded; image about 16.2 MB on disk (3.69 MB content).
+- `docker run -d --name sezzle-calculator -p 8080:8080 sezzle-calculator:test` started; the server listened on 8080.
+- `GET /api/health` returned 200 `{"status":"ok"}`.
+- `POST /api/calculate` with `1 + 2 - 4 * 3 * (5 - 1) ^ 0.5 + sqrt(16)` returned 200 `{"result":-17}`.
+- `GET /` returned 200 with the built frontend HTML.
+- The container ran as `nonroot:nonroot` using about 2.5 MiB of memory.
+- Port 8080 was forwarded from the VM to the macOS host, and the app loaded through the existing Cloudflare Tunnel with the frontend reaching the backend on the same origin.
+
+Out of scope, recorded for a separate change: an expression such as `54+++++6666` is accepted (repeated unary plus) and evaluates to `6720`. It is unchanged here.
