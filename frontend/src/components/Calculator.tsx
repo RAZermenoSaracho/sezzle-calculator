@@ -51,36 +51,34 @@ function Calculator() {
   const shown = expression.trim() === '' ? null : output
 
   return (
-    <main className="flex min-h-screen items-center justify-center px-4">
-      <div className="w-full max-w-xl">
-        <textarea
-          ref={inputRef}
-          rows={1}
-          className="peer block w-full resize-none overflow-hidden bg-transparent pb-3 text-2xl leading-tight text-green-400 caret-green-400 outline-none placeholder:text-green-900 sm:text-4xl"
-          value={expression}
-          // The expression is a single logical line; newlines only wrap visually.
-          onChange={(e) => setExpression(e.target.value.replace(/\r?\n/g, ' '))}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') e.preventDefault()
-          }}
-          placeholder="1 + 2 * 3"
-          aria-label="Expression"
-          autoFocus
-          autoComplete="off"
-          autoCapitalize="off"
-          spellCheck={false}
-        />
-        <div className="border-t border-green-900 peer-focus:border-green-500" />
-        <output
-          aria-live="polite"
-          className={`mt-3 block min-h-10 text-2xl sm:text-4xl ${
-            shown?.isError ? 'text-red-400' : 'text-green-400'
-          }`}
-        >
-          {shown?.text}
-        </output>
-      </div>
-    </main>
+    <div className="w-full max-w-xl">
+      <textarea
+        ref={inputRef}
+        rows={1}
+        className="peer block w-full resize-none overflow-hidden bg-transparent pb-3 text-2xl leading-tight text-green-400 caret-green-400 outline-none placeholder:text-green-900 sm:text-4xl"
+        value={expression}
+        // The expression is a single logical line; newlines only wrap visually.
+        onChange={(e) => setExpression(e.target.value.replace(/\r?\n/g, ' '))}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') e.preventDefault()
+        }}
+        placeholder="1 + 2 * 3"
+        aria-label="Expression"
+        autoFocus
+        autoComplete="off"
+        autoCapitalize="off"
+        spellCheck={false}
+      />
+      <div className="border-t border-green-900 peer-focus:border-green-500" />
+      <output
+        aria-live="polite"
+        className={`mt-3 block min-h-10 text-2xl sm:text-4xl ${
+          shown?.isError ? 'text-red-400' : 'text-green-400'
+        }`}
+      >
+        {shown?.text}
+      </output>
+    </div>
   )
 }
 
