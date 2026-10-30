@@ -43,5 +43,5 @@ It is **disabled by default**: nothing runs until the repository variable `DEPLO
 Verified by Ricardo in the real environment:
 
 - The runner has labels `self-hosted`, `macOS`, `X64`, runs as a launchd service, and can run `vagrant` (`/usr/local/bin/vagrant`).
-- The Docker VM directory is `/Users/razs/production/n8n-vm`; `vagrant ssh -c ... -- -T` works non-interactively.
+- The Docker VM directory is `/Users/razs/production/razs-services-vm`; `vagrant ssh -c ... -- -T` works non-interactively.
 - A manual Deploy run built and replaced the container (`Restart=unless-stopped`, port 8080), and both `http://127.0.0.1:8080/api/health` and `https://sezzle-calculator.razs.dev/api/health` returned `{"status":"ok"}`.
